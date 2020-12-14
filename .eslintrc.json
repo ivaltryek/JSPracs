@@ -11,5 +11,9 @@
         "sourceType": "module"
     },
     "rules": {
+        "quotes":["warn", "single"],
+        "no-unused-vars":"warn",
+        "comma-dangle": ["error","only-multiline"],
+        "no-console":"off"
     }
 }
