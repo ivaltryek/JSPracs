@@ -37,7 +37,6 @@ function randomItemFromArray(arr, not) {
   return item;
 }
 
-
 async function handleClick() {
   const joke = await getJoke();
   jokeHolder.textContent = joke;
