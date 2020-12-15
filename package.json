@@ -21,6 +21,7 @@
   "homepage": "https://github.com/meet86/JSPracs#readme",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "css-loader": "^5.0.1",
     "eslint": "^7.15.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-google": "^0.14.0",
@@ -29,6 +30,7 @@
     "eslint-plugin-prettier": "^3.3.0",
     "parcel-bundler": "^1.12.4",
     "prettier": "2.2.1",
+    "style-loader": "^2.0.0",
     "webpack": "^5.10.2",
     "webpack-cli": "^4.2.0"
   },
