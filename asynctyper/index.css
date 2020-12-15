@@ -1,0 +1,23 @@
+html {
+  --blue: #0072b9;
+  --pink: #d60087;
+  --grey: #e7e7e7;
+  --gray: var(--grey);
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 2rem;
+  line-height: 1.5;
+}
+
+p {
+  font-size: 1rem;
+}
