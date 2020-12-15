@@ -7,10 +7,12 @@ function randomNumberGenerator(min = 20, max = 150, randomNumber = Math.random()
 }
 
 function draw(el) {
+  console.log(el, 'el');
   let index = 1;
   const text = el.textContent;
+  console.log(text);
   const { typeMin, typeMax } = el.dataset;
-
+  console.log(el.dataset);
   async function drawLetter() {
     el.textContent = text.slice(0, index);
     index += 1;
