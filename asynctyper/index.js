@@ -16,12 +16,10 @@ function draw(el) {
     index += 1;
     const amountOfTimeToWait = randomNumberGenerator(typeMin, typeMax);
     await wait(amountOfTimeToWait);
-    // exit condition, so the recursion will end when it's supposed to
     if (index <= text.length) {
       drawLetter();
     }
   }
-  // initial call to drawLetter
   drawLetter();
 }
 
