@@ -1,0 +1,41 @@
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: inline-block;
+  position: relative;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  padding: 2rem;
+  background: skyblue;
+}
+
+.draggable {
+  cursor: move;
+  padding: 30px;
+  font-size: 17px;
+  border: 1px solid grey;
+  /* float: left; */
+  /* width: 80%; */
+  background-color: lightblue;
+}
+
+/* .delete {
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
+
+.draggable.dragging {
+  opacity: 0.5;
+}

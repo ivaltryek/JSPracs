@@ -22,7 +22,7 @@ classOb.printInFormat();
 console.log('To print a new line \n this is a way to do.');
 
 // String Interpolation
-console.log(`Hello 5*2 is ${5 * 2}`);
+console.log(`5*2 is ${5 * 2}`);
 
 // Destructuring
 const [a, b, c] = [1, 2, 3];
