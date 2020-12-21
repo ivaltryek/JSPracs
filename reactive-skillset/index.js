@@ -7,13 +7,18 @@ let inputs = [...document.querySelectorAll('.draggable input')];
 let used = document.querySelectorAll('.used');
 const itemArr = [];
 let uniques = [];
-
 function reAssign() {
   draggables.forEach((d, i) => {
-    console.log('removing dataset.num');
+    // console.log('removing dataset.num');
     d.firstElementChild.dataset.num = '';
     d.firstElementChild.dataset.num = i + 1;
     d.firstElementChild.setAttribute('placeholder', i + 1);
+    used.forEach((u) => {
+      // console.log(u.dataset.num);
+      if (parseInt(u.dataset.num, 10) === draggables.length - 2) {
+        if (u.classList.contains('used')) u.classList.remove('used');
+      }
+    });
   });
 }
 
@@ -22,29 +27,29 @@ setInterval(() => {
   inputs = [...document.querySelectorAll('.draggable input')];
   deleteBtns = document.querySelectorAll('.delete');
   used = [...document.querySelectorAll('.used')];
-  console.log('Used', ...used);
+  // console.log('Used', ...used);
   reAssign();
 
   // console.log('Updated');
-}, 1500);
+}, 1000);
 
-console.log(items);
+// console.log(items);
 
 function removePlaceholders() {
   for (let i = 0; i <= draggables.length; i++) {
-    console.log('removing placeholders');
-    console.log(draggables);
+    // console.log('removing placeholders');
+    // console.log(draggables);
     draggables[i].firstElementChild.removeAttribute('placeholder');
   }
 }
 
 function sortInputs() {
   inputs.forEach((inp) => {
-    console.log(inp.dataset.num);
+    // console.log(inp.dataset.num);
     inp.placeholder = inp.dataset.num;
   });
   for (let i = 0; i <= draggables.length; i++) {
-    console.log('Adding placeholders');
+    // console.log('Adding placeholders');
     if (i === 0) {
       // draggables[i].textContent= '1';
       // draggables[i].firstElementChild.setAttribute('value', '1.');
@@ -103,15 +108,6 @@ function sortPriorities() {
 // Start observing the target node for configured mutations
 
 // console.log(draggables[0].firstElementChild);
-draggables.forEach((draggable) => {
-  draggable.addEventListener('dragstart', () => {
-    draggable.classList.add('dragging');
-  });
-
-  draggable.addEventListener('dragend', () => {
-    draggable.classList.remove('dragging');
-  });
-});
 
 function getDragAfterElement(container, y) {
   const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
@@ -128,17 +124,17 @@ function getDragAfterElement(container, y) {
 
 containers.forEach((container) => {
   container.addEventListener('dragover', (e) => {
-    let afterElementPlaceholder;
+    // let afterElementPlaceholder;
     e.preventDefault();
     const afterElement = getDragAfterElement(container, e.clientY);
-    console.log('after element', afterElement);
+    // console.log('after element', afterElement);
     const draggable = document.querySelector('.dragging');
-
-    if (afterElement !== undefined) {
-      afterElementPlaceholder = afterElement.firstElementChild.value;
-    }
+    // console.log(afterElement, 'afterel');
+    // if (afterElement !== undefined) {
+    //   afterElementPlaceholder = afterElement.firstElementChild.value;
+    // }
     // eslint-disable-next-line prefer-const
-    let draggablePlaceholder = draggable.firstElementChild.value;
+    // let draggablePlaceholder = draggable.firstElementChild.value;
 
     // const tempHolder = afterElementPlaceholder;
     // afterElementPlaceholder = draggablePlaceholder;
@@ -151,15 +147,16 @@ containers.forEach((container) => {
     // const afterElementClone = afterElement.cloneNode(true);
     // draggableClone.firstElementChild.placeholder = afterElement.firstElementChild.placeholder;
     // afterElementClone.firstElementChild.placeholder = draggable.firstElementChild.placeholder;
-    if (afterElement !== undefined) {
-      afterElement.firstElementChild.placeholder = draggablePlaceholder;
-    }
-    draggable.firstElementChild.placeholder = afterElementPlaceholder;
-    console.log(draggable.firstElementChild.placeholder);
+    // if (afterElement !== undefined) {
+    //   afterElement.firstElementChild.placeholder = draggablePlaceholder;
+    // }
+    // draggable.firstElementChild.placeholder = afterElementPlaceholder;
+    // console.log(draggable.firstElementChild.placeholder);
 
     if (afterElement == null) {
       container.appendChild(draggable);
     } else {
+      // console.log(draggable.isSameNode(afterElement), '?');
       container.insertBefore(draggable, afterElement);
     }
     sortInputs();
@@ -168,7 +165,7 @@ containers.forEach((container) => {
 
 function deleteItem(e) {
   const clickedBtn = e.currentTarget;
-  console.log(clickedBtn);
+  // console.log(clickedBtn);
   const data = clickedBtn.closest('.draggable');
   const drags = document.querySelectorAll('.draggable');
   if (drags.length > 5) {
@@ -189,22 +186,24 @@ function disableOtherItems(e) {
     if (draggables[i] !== mouseentered) {
       draggables[i].firstElementChild.disabled = true;
     } else {
-      console.log(draggables[i].firstElementChild);
+      // console.log(draggables[i].firstElementChild);
       draggables[i].firstElementChild.disabled = false;
     }
   }
 }
 
 function addSkillTextBox(e) {
-  console.log(e.currentTarget.placeholder, 'event console');
-  const p = document.createElement('p');
-  p.classList.add('draggable');
-  p.draggable = true;
+  // console.log(e.currentTarget.placeholder, 'event console');
+  // const p = document.createElement('p');
+  // p.classList.add('draggable');
+  // p.draggable = true;
   const skillTextBox = `
-      <input class="input" type="text" data-num="" placeholder="" />
-      <button class="delete">&times;</button>
+      <p class="draggable" draggable="true">
+        <input class="input" type="text" data-num="" />
+        <button class="delete">&times;</button>
+    </p>
   `;
-  p.innerHTML = skillTextBox;
+  // p.innerHTML = skillTextBox;
   inputs.filter((val) => {
     // if (val.placeholder % 3 === 0) {
     //   // if (e.currentTarget.placeholder === i + 1) {
@@ -215,10 +214,11 @@ function addSkillTextBox(e) {
     //   console.log('removing dataset.num');
     //   d.firstElementChild.dataset.num = i;
     // });
-    if (val.placeholder % 3 === 0 && e.currentTarget.placeholder === val.placeholder) {
-      console.log(val);
-      console.log('valplaceholder', val.placeholder);
-      singleContainer.insertAdjacentElement('beforeend', p);
+    if (parseInt(e.currentTarget.dataset.num, 10) === draggables.length - 2
+        && e.currentTarget.dataset.num === val.placeholder) {
+      // console.log(val);
+      // console.log('valplaceholder', val.placeholder);
+      singleContainer.insertAdjacentHTML('beforeend', skillTextBox);
       val.classList.add('used');
       // removePlaceholders();
       sortInputs();
@@ -227,6 +227,19 @@ function addSkillTextBox(e) {
 }
 
 setInterval(() => {
+  draggables.forEach((draggable) => {
+    draggable.addEventListener('dragstart', (ev) => {
+      // console.log(ev);
+      // console.log(ev.dataTransfer.setData('text/plain', ev.target.value), 'setting target id');
+      draggable.classList.add('dragging');
+    });
+
+    draggable.addEventListener('dragend', (ev) => {
+      // console.log(ev.toElement);
+      draggable.classList.remove('dragging');
+    });
+  });
+
   draggables.forEach((draggable) => {
     draggable.addEventListener('mouseenter', disableOtherItems);
   });
@@ -243,6 +256,6 @@ setInterval(() => {
     u.removeEventListener('focusin', addSkillTextBox, true);
   });
   // console.log('Updating listneres');
-}, 1500);
+}, 1200);
 
 sortInputs();
